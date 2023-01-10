@@ -30,3 +30,22 @@ module.exports.getPosts = async(req,res) => {
     const randomDoc = doc.sort(()=>-1)
     res.send(randomDoc)
 }
+
+module.exports.like = async (req,res) =>{
+    const {value,username} = req.query
+    if (value === "1") {
+        Post.updateOne({ username }, { $inc: { likes: 1 }}, (e) => {
+            // console.log(e)
+          });
+        res.send({
+          done:true
+        })
+      } else {
+        Post.updateOne({ username }, { $inc: { likes: -1 }}, (e) => {
+          // console.log(e)
+        });
+      }
+      res.send({
+        done:true
+      })
+}
