@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
     email:{
         type:String
     },
-    bio:String,
     joinedClubs:{
         type:mongoose.Schema.Types.Array
     },
@@ -32,71 +31,12 @@ const userSchema = new mongoose.Schema({
     gamesIPlay:{
         type:[]
     },
-    team:{
+    crew:{
         type:[]
     },
     balance:{
         type:Number
-    },
-    followers:[
-        {
-            username:String,
-            email:String,
-        }
-    ],
-    followCount:Number,
-    followingCount:Number,
-    following:[
-        {
-            username:String,
-            email:String,
-        }
-    ],
-    post:[
-        {
-            type:String,
-            url:String
-        }
-    ],
-    directMessage:[
-        {
-            name:String,
-            avatar:String,
-            messages:[
-                {
-                    date:String,
-                    msg:String,
-                    type:String
-                }
-            ]
-        }
-    ],
-    notifications:[
-        {
-            date:String,
-            message:String,
-            callToActionLink:String
-        }
-    ],
-    coins:Number,
-    diamonds:Number,
-    name:String,
-    isVerified:Boolean, 
-    subscription:[
-        {
-            name:String,
-            duration:String
-        }
-    ],
-    phone:"",
-    ip_address:"",
-    state:"",
-    likedPost:[
-        {
-            username:String,
-            email:String,
-        }  
-    ]
+    }
 })
 
 module.exports = userSchema
