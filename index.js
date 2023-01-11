@@ -10,7 +10,8 @@ const io = require("socket.io")(server,{
         origin:"*"
     }
 })
-const cors = require("cors")
+const cors = require("cors");
+const User = require("./models/User");
 app.use(express.json());
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
@@ -30,9 +31,9 @@ app.get("/", (req, res) => {
 io.on('connection',(socket)=>{
     socket.on("club-chat",async (payloads)=>{
         io.emit("chats",payloads)
-        console.log(payloads)
+        // console.log(payloads)
         const club = await ClubServer.findOne({
-            clubID:payloads.uuid
+            _id:payloads.uuid
         })
         club.channelList[payloads.index].messages.push({
             message:payloads.message,
@@ -42,13 +43,24 @@ io.on('connection',(socket)=>{
             date:payloads.date
         })
         await club.save()
-        console.log(club)
+        // console.log(club)
         // console.log(club.channelList[0].messages)
     })
 })
 
+// function nti (){
+//     User.updateMany({}, { $set: { likedPost: [{}] } }, function(error, result) {
+//         if (error) {
+//           console.log(error)
+//         } else {
+//             console.log(result)
+//         }
+//       });
+// }
+// nti()
+
 server.listen(PORT,(e)=>{
-    console.log("connected")
+    console.log("connected at http://localhost:8080")
 })
 
 
