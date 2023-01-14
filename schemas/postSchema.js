@@ -2,16 +2,13 @@ const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
     type:String,
-    uid:String,
-    username:String,
+    user:mongoose.Schema.Types.ObjectId,
     message:String,
     date:String,
     likes:Number,
-    image:String,
-    avatar:String,
     comments:[
         {
-            username:String,
+            user:mongoose.Schema.Types.ObjectId,
             date:String,
             message:String
         }
